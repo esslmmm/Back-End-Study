@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="time">Current time</h1>
+    <button id="btnTime">Get time</button>
+
+    <script>
+        document.querySelector('#btnTime').onclick = async function(){
+            //get time from server
+            try{
+                
+            const response = await fetch('/now')
+            if(response.ok){ // response.ok : response.status === 200
+                
+                const now = await response.text();
+                document.querySelector('#time').textContent = now
+
+            }else{
+
+                //alert('connection error')
+                throw Error('connection error')
+
+            }
+            }catch(error){
+
+                alert(error.message)
+
+            }
+            
+        }
+    </script>
+</body>
+</html>
